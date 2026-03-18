@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,9 +38,10 @@ public class IngredientService {
 
 
     public Set<Ingredient> getIngredientsByIds(List<Integer> ingredientIds) {
-        return ingredientIds.stream()
-                .map(this::findById)
-                .collect(Collectors.toSet());
+        if (ingredientIds == null || ingredientIds.isEmpty()) {
+            return new HashSet<>();
+        }
+        return new HashSet<>(ingredientRepository.findAllById(ingredientIds));
     }
 
     public Ingredient findById(int id) {

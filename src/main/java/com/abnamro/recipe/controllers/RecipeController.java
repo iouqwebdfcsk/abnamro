@@ -75,8 +75,9 @@ public class RecipeController {
 
     @ApiOperation(value = "Update the recipe")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Ingredient created"),
-            @ApiResponse(code = 400, message = "Bad input")
+            @ApiResponse(code = 200, message = "Recipe updated successfully"),
+            @ApiResponse(code = 400, message = "Bad input"),
+            @ApiResponse(code = 404, message = "Recipe not found")
     })
     @RequestMapping(method = RequestMethod.PATCH)
     public void updateRecipe(

@@ -91,11 +91,10 @@ public class RecipeService {
     }
 
     public void deleteRecipe(int id) {
-        if (!recipeRepository.existsById(id)) {
+        int deletedRows = recipeRepository.deleteByIdReturning(id);
+        if (deletedRows == 0) {
             throw new NotFoundException(messageProvider.getMessage("recipe.notFound"));
         }
-
-        recipeRepository.deleteById(id);
     }
 
     public List<RecipeResponse> findBySearchCriteria(RecipeSearchRequest recipeSearchRequest, int page, int size) {
