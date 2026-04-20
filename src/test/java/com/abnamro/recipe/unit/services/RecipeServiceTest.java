@@ -25,6 +25,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RecipeServiceTest {
+
     @Mock
     private RecipeRepository recipeRepository;
 
@@ -81,16 +82,13 @@ public class RecipeServiceTest {
 
     @Test
     public void test_deleteRecipe_successfully() {
-        when(recipeRepository.existsById(anyInt())).thenReturn(true);
-        doNothing().when(recipeRepository).deleteById(anyInt());
-
+        when(recipeRepository.deleteByIdReturning(anyInt())).thenReturn(1);
         recipeService.deleteRecipe(1);
     }
 
     @Test(expected = NotFoundException.class)
     public void test_deleteRecipe_notFound() {
-        when(recipeRepository.existsById(anyInt())).thenReturn(false);
-
+        when(recipeRepository.deleteByIdReturning(anyInt())).thenReturn(0);
         recipeService.deleteRecipe(1);
     }
 

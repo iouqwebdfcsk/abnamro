@@ -21,7 +21,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -98,8 +97,7 @@ public class RecipeService {
     }
 
     public List<RecipeResponse> findBySearchCriteria(RecipeSearchRequest recipeSearchRequest, int page, int size) {
-        List<SearchCriteria> searchCriterionRequests = new ArrayList<>();
-        RecipeSpecificationBuilder builder = new RecipeSpecificationBuilder(searchCriterionRequests);
+        RecipeSpecificationBuilder builder = new RecipeSpecificationBuilder();
         Pageable pageRequest = PageRequest.of(page, size, Sort.by("name")
                 .ascending());
 
@@ -115,7 +113,7 @@ public class RecipeService {
                                                             RecipeSpecificationBuilder builder) {
         List<SearchCriteriaRequest> searchCriteriaRequests = recipeSearchRequest.getSearchCriteriaRequests();
 
-        if (Optional.ofNullable(searchCriteriaRequests).isPresent()) {
+        if (searchCriteriaRequests != null && !searchCriteriaRequests.isEmpty()) {
             List<SearchCriteria> searchCriteriaList = searchCriteriaRequests.stream()
                     .map(SearchCriteria::new)
                     .collect(Collectors.toList());

@@ -3,15 +3,12 @@ package com.abnamro.recipe.search;
 import com.abnamro.recipe.models.Recipe;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class RecipeSpecificationBuilder {
-    private final List<SearchCriteria> params;
-
-    public RecipeSpecificationBuilder(List<SearchCriteria> searchCriterionRequests) {
-        this.params = searchCriterionRequests;
-    }
+    private final List<SearchCriteria> params = new ArrayList<>();
 
     public final RecipeSpecificationBuilder with(SearchCriteria searchCriteriaRequest) {
         params.add(searchCriteriaRequest);
