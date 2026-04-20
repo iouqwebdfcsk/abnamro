@@ -5,7 +5,6 @@ import com.abnamro.recipe.search.filter.*;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +14,16 @@ public class RecipeSpecification implements Specification<Recipe> {
     private final SearchCriteria criteria;
 
     // I made it static because this filters isn't object-specific and no need to populate it with every new specification
-    private static final List<SearchFilter> searchFilters = new ArrayList<>();
+    private static final List<SearchFilter> searchFilters = List.of(
+                new SearchFilterEqual(),
+                new SearchFilterNotEqual(),
+                new SearchFilterContains(),
+                new SearchFilterDoesNotContain()
+        );
+
 
     public RecipeSpecification(SearchCriteria criteria) {
         super();
-        filterList();
         this.criteria = criteria;
     }
 
@@ -39,10 +43,4 @@ public class RecipeSpecification implements Specification<Recipe> {
                 .map(searchFilter -> searchFilter.apply(cb, filterKey, filterValue, root, subRoot))).orElse(null);
     }
 
-    private void filterList() {
-        searchFilters.add(new SearchFilterEqual());
-        searchFilters.add(new SearchFilterNotEqual());
-        searchFilters.add(new SearchFilterContains());
-        searchFilters.add(new SearchFilterDoesNotContain());
-    }
 }
