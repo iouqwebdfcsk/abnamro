@@ -30,9 +30,6 @@ public class SearchCriteriaRequest {
     @EnumValidator(enumClass = SearchOperationReqInput.class, message = "{searchOperation.invalid}")
     private String operation;
 
-    @ApiModelProperty(hidden = true)
-    private String dataOption;
-
     public SearchCriteriaRequest() {
     }
 
@@ -54,10 +51,6 @@ public class SearchCriteriaRequest {
         return operation;
     }
 
-    public String getDataOption() {
-        return dataOption;
-    }
-
     public void setFilterKey(String filterKey) {
         this.filterKey = filterKey;
     }
@@ -70,7 +63,4 @@ public class SearchCriteriaRequest {
         this.operation = operation;
     }
 
-    public void setDataOption(String dataOption) {
-        this.dataOption = dataOption;
-    }
 }

@@ -18,8 +18,8 @@ public class SearchCriteria {
         this.value = value;
     }
 
-    public SearchCriteria(SearchCriteriaRequest request) {
-        this.dataOption = request.getDataOption();
+    public SearchCriteria(SearchCriteriaRequest request, String dataOption) {
+        this.dataOption = dataOption;
         this.filterKey = request.getFilterKey();
         this.operation = request.getOperation();
         this.value = request.getValue();

@@ -115,7 +115,7 @@ public class RecipeService {
 
         if (searchCriteriaRequests != null && !searchCriteriaRequests.isEmpty()) {
             List<SearchCriteria> searchCriteriaList = searchCriteriaRequests.stream()
-                    .map(SearchCriteria::new)
+                    .map(searchCriteriaRequest -> new SearchCriteria(searchCriteriaRequest, recipeSearchRequest.getDataOption()))
                     .collect(Collectors.toList());
 
             if (!searchCriteriaList.isEmpty()) searchCriteriaList.forEach(criteria -> {
