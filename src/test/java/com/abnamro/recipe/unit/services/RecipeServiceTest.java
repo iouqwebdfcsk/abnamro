@@ -3,11 +3,9 @@ package com.abnamro.recipe.unit.services;
 import com.abnamro.recipe.api.request.CreateRecipeRequest;
 import com.abnamro.recipe.api.request.RecipeSearchRequest;
 import com.abnamro.recipe.api.request.UpdateRecipeRequest;
-import com.abnamro.recipe.config.MessageProvider;
 import com.abnamro.recipe.exceptions.NotFoundException;
 import com.abnamro.recipe.models.Recipe;
 import com.abnamro.recipe.repositories.RecipeRepository;
-import com.abnamro.recipe.services.IngredientService;
 import com.abnamro.recipe.services.RecipeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,12 +26,6 @@ public class RecipeServiceTest {
 
     @Mock
     private RecipeRepository recipeRepository;
-
-    @Mock
-    private IngredientService ingredientService;
-
-    @Mock
-    private MessageProvider messageProvider;
 
     @InjectMocks
     private RecipeService recipeService;
